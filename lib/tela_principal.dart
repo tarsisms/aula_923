@@ -95,14 +95,37 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   }
 
   buildContainerPacoteTuristico({String nomePacote = ''}) {
-    return Container(
+    return Card(
       margin: EdgeInsets.only(top: 16),
       color: Colors.white,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.network(
-              'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium'),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                child: Image.network(
+                  'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium',
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                color: Colors.deepOrange,
+                child: Text(
+                  '-45%',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
           Padding(
             padding: EdgeInsets.all(16),
             child: Column(
