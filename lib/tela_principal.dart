@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aula_923/card_pacote_turistico.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({Key? key}) : super(key: key);
@@ -19,11 +20,27 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           child: ListView(
             children: [
               buildContainerPropaganda(),
-              buildContainerPacoteTuristico(
-                nomePacote: 'Pacote Cancún 2023',
+              CardPacoteTuristico(
+                imagem:
+                    'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium',
+                desconto: 25,
+                descricao: 'Aéreo + Hotel All Inclusive',
+                titulo: 'Pacote Cancún 2023',
+                numDiarias: 2,
+                numPessoas: 5,
+                valorAntigo: 6819,
+                valorAtual: 3749,
               ),
-              buildContainerPacoteTuristico(
-                nomePacote: 'Pacote Maragogi 2024',
+              CardPacoteTuristico(
+                titulo: 'Pacote Maragogi 2023 - 2024',
+                imagem:
+                'https://magazine.zarpo.com.br/wp-content/uploads/2021/07/Capa-Mag_maragogi_piscinas-naturais.jpg',
+                desconto: 30,
+                descricao: 'Hotel All Inclusive',
+                numDiarias: 3,
+                numPessoas: 10,
+                valorAntigo: 5679,
+                valorAtual: 1687,
               ),
             ],
           ),
@@ -94,72 +111,5 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     );
   }
 
-  buildContainerPacoteTuristico({String nomePacote = ''}) {
-    return Card(
-      margin: EdgeInsets.only(top: 16),
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                child: Image.network(
-                  'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium',
-                  height: 180,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(16),
-                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                color: Colors.deepOrange,
-                child: Text(
-                  '-45%',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  nomePacote,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text('Aéreo + Hotel All Inclusive',
-                    style: TextStyle(fontSize: 16)),
-                SizedBox(height: 8),
-                Text('5 Diárias 1 Pessoa', style: TextStyle(fontSize: 16)),
-                SizedBox(height: 8),
-                Text('A partir de R\$ 6818'),
-                Text(
-                  'R\$ 3749',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.orange),
-                ),
-                SizedBox(height: 8),
-                Text('Cancelamento Grátis!',
-                    style: TextStyle(color: Colors.green)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }
