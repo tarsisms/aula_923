@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:aula_923/card_pacote_turistico.dart';
+import 'package:aula_923/pacote_turistico.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({Key? key}) : super(key: key);
@@ -21,26 +22,30 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             children: [
               buildContainerPropaganda(),
               CardPacoteTuristico(
-                imagem:
-                    'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium',
-                desconto: 25,
-                descricao: 'Aéreo + Hotel All Inclusive',
-                titulo: 'Pacote Cancún 2023',
-                numDiarias: 2,
-                numPessoas: 5,
-                valorAntigo: 6819,
-                valorAtual: 3749,
+                pacoteTuristico: PacoteTuristico(
+                  imagem:
+                      'https://a.cdn-hotels.com/gdcs/production97/d402/6baff29c-e43b-4caf-a9e8-5dcf1279dea0.jpg?impolicy=fcrop&w=800&h=533&q=medium',
+                  desconto: 25,
+                  descricao: 'Aéreo + Hotel All Inclusive',
+                  titulo: 'Pacote Cancún 2023',
+                  numDiarias: 2,
+                  numPessoas: 5,
+                  valorAntigo: 6819,
+                  valorAtual: 3749,
+                ),
               ),
               CardPacoteTuristico(
-                titulo: 'Pacote Maragogi 2023 - 2024',
-                imagem:
-                'https://magazine.zarpo.com.br/wp-content/uploads/2021/07/Capa-Mag_maragogi_piscinas-naturais.jpg',
-                desconto: 30,
-                descricao: 'Hotel All Inclusive',
-                numDiarias: 3,
-                numPessoas: 10,
-                valorAntigo: 5679,
-                valorAtual: 1687,
+                pacoteTuristico: PacoteTuristico(
+                  titulo: 'Pacote Maragogi 2023 - 2024',
+                  imagem:
+                      'https://magazine.zarpo.com.br/wp-content/uploads/2021/07/Capa-Mag_maragogi_piscinas-naturais.jpg',
+                  desconto: 30,
+                  descricao: 'Hotel All Inclusive',
+                  numDiarias: 3,
+                  numPessoas: 10,
+                  valorAntigo: 5679,
+                  valorAtual: 1687,
+                ),
               ),
             ],
           ),
@@ -110,6 +115,4 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       ),
     );
   }
-
-
 }
