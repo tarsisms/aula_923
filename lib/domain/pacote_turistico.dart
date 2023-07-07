@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class PacoteTuristico {
   final String imagem;
   final int desconto;

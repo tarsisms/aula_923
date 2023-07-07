@@ -1,5 +1,6 @@
+import 'package:aula_923/domain/pacote_turistico.dart';
 import 'package:flutter/material.dart';
-import 'package:aula_923/pacote_turistico.dart';
+
 
 class DetalhesPage extends StatefulWidget {
   final PacoteTuristico pacoteTuristico;

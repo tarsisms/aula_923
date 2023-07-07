@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:aula_923/card_pacote_turistico.dart';
-import 'package:aula_923/pacote_turistico.dart';
+import 'package:aula_923/widgets/card_pacote_turistico.dart';
+import 'package:aula_923/domain/pacote_turistico.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({Key? key}) : super(key: key);
