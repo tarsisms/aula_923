@@ -40,7 +40,7 @@ class _CardPacoteTuristicoState extends State<CardPacoteTuristico> {
                   borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
                   child: Image.network(
                     widget.pacoteTuristico.imagem,
-                    height: 180,
+                    height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),

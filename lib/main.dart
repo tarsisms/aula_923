@@ -3,7 +3,7 @@ import 'package:aula_923/pages/tela_principal.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       home: TelaPrincipal(),
     ),
   );
