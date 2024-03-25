@@ -22,52 +22,52 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: [
           Container(
-              margin: EdgeInsets.all(16) ,
-              color: Colors.deepPurple,
-              child: Row(
-                children: [
-                  Expanded(child:
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Tops destinos mais buscados',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            'Corre que ta rolando muita promoção',
-                            style: TextStyle(
+            margin: EdgeInsets.all(16),
+            color: Colors.deepPurple,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Tops destinos mais buscados',
+                          style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
-                            ),
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'Corre que ta rolando muita promoção',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
                           ),
-                          SizedBox(height: 8),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
-                              'EU QUERO!',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.yellow),
-                          )
-                        ],
-                      ),
-                    )
+                        ),
+                        SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'EU QUERO!',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.yellow),
+                        )
+                      ],
+                    ),
                   ),
-                  Image.network(
-                    'https://img.freepik.com/fotos-gratis/casal-multirracial-com-bola-posando-na-praia_23-2148137988.jpg',
-                    height: 170,
-                  ),
-                ],
-              ),
+                ),
+                Image.network(
+                  'https://img.freepik.com/fotos-gratis/casal-multirracial-com-bola-posando-na-praia_23-2148137988.jpg',
+                  height: 170,
+                ),
+              ],
+            ),
           ),
         ],
       ),
