@@ -1,3 +1,4 @@
+import 'package:aula_923/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -80,74 +81,86 @@ class _HomePageState extends State<HomePage> {
   }
 
   buildCardPacote() {
-    return Card(
-      color: Colors.white,
-      margin: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-              'https://www.viagenscinematograficas.com.br/wp-content/uploads/2019/03/Cancun-Melhores-Praias-Riviera-Maya-Capa.jpg.webp'),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Pacote Cancún 2024',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPage();
+            },
+          ),
+        );
+      },
+      child: Card(
+        color: Colors.white,
+        margin: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+                'https://www.viagenscinematograficas.com.br/wp-content/uploads/2019/03/Cancun-Melhores-Praias-Riviera-Maya-Capa.jpg.webp'),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pacote Cancún 2024',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
                   ),
-                ),
-                SizedBox(height: 4),
-                Text('Aéreo + Hotel All inclusive'),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.wb_sunny_outlined,
-                      size: 18,
-                    ),
-                    SizedBox(width: 6),
-                    Text('5 Diárias'),
-                    SizedBox(width: 6),
-                    Icon(
-                      Icons.person,
-                      size: 18,
-                    ),
-                    SizedBox(width: 6),
-                    Text('1 Pessoa'),
-                  ],
-                ),
-                SizedBox(height: 4),
-                Text('A partir de R\$ 6.818'),
-                Row(
-                  children: [
-                    Text(
-                      'R\$ 3.749',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Color(0xFFFD6C00),
+                  SizedBox(height: 4),
+                  Text('Aéreo + Hotel All inclusive'),
+                  SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.wb_sunny_outlined,
+                        size: 18,
                       ),
-                    ),
-                    SizedBox(width: 6),
-                    Text('Taxa Grátis em até 12x'),
-                  ],
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Cancelamento Grátis!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                      SizedBox(width: 6),
+                      Text('5 Diárias'),
+                      SizedBox(width: 6),
+                      Icon(
+                        Icons.person,
+                        size: 18,
+                      ),
+                      SizedBox(width: 6),
+                      Text('1 Pessoa'),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                  SizedBox(height: 4),
+                  Text('A partir de R\$ 6.818'),
+                  Row(
+                    children: [
+                      Text(
+                        'R\$ 3.749',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Color(0xFFFD6C00),
+                        ),
+                      ),
+                      SizedBox(width: 6),
+                      Text('Taxa Grátis em até 12x'),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Cancelamento Grátis!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
