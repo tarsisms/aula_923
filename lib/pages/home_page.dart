@@ -1,0 +1,201 @@
+import 'package:aula_923/domain/pacote_turistico.dart';
+import 'package:aula_923/pages/detail_page.dart';
+import 'package:flutter/material.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List pacotes = [
+    PacoteTuristico(
+        urlImagem:
+            'https://www.viagenscinematograficas.com.br/wp-content/uploads/2019/03/Cancun-Melhores-Praias-Riviera-Maya-Capa.jpg.webp',
+        titulo: 'Pacote Cancún 2025',
+        descricao: 'Aéreo + Hotel All inclusive',
+        numDiarias: 5,
+        numPessoas: 7,
+        valorAntigo: 6818,
+        valorAtual: 3749),
+    PacoteTuristico(
+      urlImagem:
+          'https://xtravel.com.br/wp-content/uploads/2024/02/mercure-resort-allinclusive-maldivas-xtravel.jpg',
+      descricao: 'Hotel All Inclusive',
+      titulo: 'Pacote Maldivas 2025/2026',
+      numDiarias: 3,
+      numPessoas: 5,
+      valorAntigo: 10560,
+      valorAtual: 6689,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF10397B), // Colors.lightBlue,
+        title: const Text(
+          'Pesquisar',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 22,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      body: ListView(
+        children: [
+          buildContainerPropaganda(),
+          // FOR {
+          buildCardPacote(
+            pacoteTuristico: pacotes[0],
+          ),
+          buildCardPacote(
+            pacoteTuristico: pacotes[1],
+          ),
+          // }
+        ],
+      ),
+    );
+  }
+
+  buildCardPacote({
+    required PacoteTuristico pacoteTuristico,
+  }) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailPage();
+            },
+          ),
+        );
+      },
+      child: Card(
+        color: Colors.white,
+        margin: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(pacoteTuristico.urlImagem),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pacoteTuristico.titulo,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(pacoteTuristico.descricao),
+                  SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.wb_sunny_outlined,
+                        size: 18,
+                      ),
+                      SizedBox(width: 6),
+                      Text('${pacoteTuristico.numDiarias} Diárias'),
+                      SizedBox(width: 6),
+                      Icon(
+                        Icons.person,
+                        size: 18,
+                      ),
+                      SizedBox(width: 6),
+                      Text('${pacoteTuristico.numPessoas} Pessoas'),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Text('A partir de R\$ ${pacoteTuristico.valorAntigo}'),
+                  Row(
+                    children: [
+                      Text(
+                        'R\$ ${pacoteTuristico.valorAtual}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Color(0xFFFD6C00),
+                        ),
+                      ),
+                      SizedBox(width: 6),
+                      Text('Taxa Grátis em até 12x'),
+                    ],
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Cancelamento Grátis!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildContainerPropaganda() {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      color: Colors.deepPurple,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  const Text(
+                    'Tops destinos mais buscados',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'Corre que ta rolando muita promoção',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'EU QUERO!',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Image.network(
+            'https://img.freepik.com/fotos-gratis/casal-multirracial-com-bola-posando-na-praia_23-2148137988.jpg',
+            height: 170,
+          ),
+        ],
+      ),
+    );
+  }
+}
