@@ -1,21 +1,29 @@
+import 'package:aula_923/domain/pacote_turistico.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final PacoteTuristico pacoteTuristico;
+
+  const DetailPage({
+    super.key,
+    required this.pacoteTuristico,
+  });
 
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
+  PacoteTuristico get pacote => widget.pacoteTuristico;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           Image.network(
-            'https://www.viagenscinematograficas.com.br/wp-content/uploads/2019/03/Cancun-Melhores-Praias-Riviera-Maya-Capa.jpg.webp',
+            pacote.urlImagem,
           ),
           Padding(
             padding: const EdgeInsets.all(16),
@@ -23,7 +31,7 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'CANCÚN, MEX',
+                  pacote.cidade,
                   style: GoogleFonts.montserrat(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -31,22 +39,22 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Pacote Cancún 2025',
+                  pacote.titulo,
                   style: GoogleFonts.montserrat(
                     fontSize: 25,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 8),
-                buildText('Aéreo + Hotel All Inclusive'),
+                buildText(pacote.descricao),
                 const SizedBox(height: 8),
-                buildText('5 ou 7 diárias'),
+                buildText('${pacote.numDiarias} diárias'),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     buildText('Válido para o período de:'),
-                    buildText('A partir de R\$ 6816'),
+                    buildText('A partir de R\$ ${pacote.valorAntigo}'),
                   ],
                 ),
                 Row(
@@ -54,7 +62,7 @@ class _DetailPageState extends State<DetailPage> {
                   children: [
                     Expanded(
                       child: Text(
-                        'De 01 jan. 25 a 31 dez. 25',
+                        pacote.validade,
                         style: GoogleFonts.montserrat(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -63,7 +71,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'R\$ 3749',
+                      'R\$ ${pacote.valorAtual}',
                       style: GoogleFonts.montserrat(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -100,30 +108,6 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 const SizedBox(height: 16),
                 const Divider(),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFE81F7C),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 32,
-                    ),
-                  ),
-                  child: const Text(
-                    'Voltar',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
