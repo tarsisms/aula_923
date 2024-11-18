@@ -1,4 +1,6 @@
 import 'package:aula_923/db/database.dart';
+import 'package:aula_923/db/db_helper.dart';
+import 'package:aula_923/db/pacote_dao.dart';
 import 'package:aula_923/domain/pacote_turistico.dart';
 import 'package:aula_923/pages/detail_page.dart';
 import 'package:aula_923/widgets/card_pacote_turistico.dart';
@@ -12,6 +14,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<PacoteTuristico> pacotes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    pacotes = await PacoteDao().listarPacotes();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +48,10 @@ class _HomePageState extends State<HomePage> {
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: Database.pacotes.length,
+            itemCount: pacotes.length,
             itemBuilder: (context, i) {
               return CardPacoteTuristico(
-                pacoteTuristico: Database.pacotes[i],
+                pacoteTuristico: pacotes[i],
               );
             },
           ),
