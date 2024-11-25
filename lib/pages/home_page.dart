@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async {
     pacotes = await PacoteDao().listarPacotes();
+    setState(() {});
   }
 
   @override
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           // for(int i = 0; i < pacotes.length; i++){
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: pacotes.length,
             itemBuilder: (context, i) {
               return CardPacoteTuristico(
@@ -90,6 +91,8 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 8),
                   ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow),
                     child: const Text(
                       'EU QUERO!',
                       style: TextStyle(
@@ -97,8 +100,6 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow),
                   )
                 ],
               ),

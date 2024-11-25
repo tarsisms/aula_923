@@ -1,4 +1,6 @@
+import 'package:aula_923/db/user_dao.dart';
 import 'package:aula_923/pages/home_page.dart';
+import 'package:aula_923/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -81,28 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 32),
                 // Spacer(),
                 ElevatedButton(
-                  onPressed: () {
-                    // Validar os campos de e-mail e senha
-                    if (formKey.currentState!.validate()) {
-                      // Recuperar os dados dos TextFormFields
-                      String email = emailController.text;
-                      String senha = senhaController.text;
-
-                      if (email == 'joao@gmail.com' && senha == '123456') {
-                        // Navegar p/ HomePage
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomePage();
-                            },
-                          ),
-                        );
-                      } else {
-                        print('E-mail e/ou Senha incorreto(s)');
-                      }
-                    }
-                  },
+                  onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFE81F7C),
                     shape: RoundedRectangleBorder(
@@ -117,6 +98,36 @@ class _LoginPageState extends State<LoginPage> {
                     'Entrar com a conta Hurb',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return RegisterPage();
+                        },
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 32,
+                    ),
+                  ),
+                  child: const Text(
+                    'Criar uma nova conta',
+                    style: TextStyle(
+                      color: const Color(0xFFE81F7C),
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
@@ -146,5 +157,30 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> onPressed() async {
+    // Validar os campos de e-mail e senha
+    if (formKey.currentState!.validate()) {
+      // Recuperar os dados dos TextFormFields
+      String email = emailController.text;
+      String senha = senhaController.text;
+
+      bool auth = await UserDao().autenticar(email, senha);
+
+      if (auth) {
+        // Navegar p/ HomePage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return HomePage();
+            },
+          ),
+        );
+      } else {
+        print('E-mail e/ou Senha incorreto(s)');
+      }
+    }
   }
 }

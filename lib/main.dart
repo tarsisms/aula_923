@@ -5,7 +5,7 @@ import 'package:aula_923/pages/login.dart';
 void main() {
   runApp(
     const MaterialApp(
-      home: HomePage()
+      home: LoginPage()
     ),
   );
 }
