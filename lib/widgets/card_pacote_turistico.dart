@@ -40,55 +40,55 @@ class _CardPacoteTuristicoState extends State<CardPacoteTuristico> {
           children: [
             Image.network(pacote.urlImagem),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     pacote.titulo,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(pacote.descricao),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.wb_sunny_outlined,
                         size: 18,
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text('${pacote.numDiarias} Diárias'),
-                      SizedBox(width: 6),
-                      Icon(
+                      const SizedBox(width: 6),
+                      const Icon(
                         Icons.person,
                         size: 18,
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text('${pacote.numPessoas} Pessoas'),
                     ],
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text('A partir de R\$ ${pacote.valorAntigo}'),
                   Row(
                     children: [
                       Text(
                         'R\$ ${pacote.valorAtual}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: Color(0xFFFD6C00),
                         ),
                       ),
-                      SizedBox(width: 6),
-                      Text('Taxa Grátis em até 12x'),
+                      const SizedBox(width: 6),
+                      const Expanded(child: Text('Taxa Grátis em até 12x')),
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Text(
+                  const SizedBox(height: 4),
+                  const Text(
                     'Cancelamento Grátis!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

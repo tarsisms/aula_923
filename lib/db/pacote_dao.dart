@@ -5,6 +5,12 @@ import 'package:aula_923/domain/pacote_turistico.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PacoteDao {
+
+  salvarPacote(PacoteTuristico pacote) async {
+    Database database = await DBHelper().initDB();
+    database.insert('PACOTE', pacote.toJson());
+  }
+
   Future<List<PacoteTuristico>> listarPacotes() async {
     Database db = await DBHelper().initDB();
     String sql = 'SELECT * FROM PACOTE;';

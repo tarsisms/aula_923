@@ -2,6 +2,7 @@ import 'package:aula_923/db/pacote_dao.dart';
 import 'package:aula_923/db/shared_prefs.dart';
 import 'package:aula_923/domain/pacote_turistico.dart';
 import 'package:aula_923/pages/login.dart';
+import 'package:aula_923/pages/register_package.dart';
 import 'package:aula_923/widgets/card_pacote_turistico.dart';
 import 'package:flutter/material.dart';
 
@@ -29,36 +30,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              SharedPrefs().setUser(false);
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginPage();
-                    },
-                  ));
-            },
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-          ),
-        ],
-        backgroundColor: const Color(0xFF10397B), // Colors.lightBlue,
-        title: const Text(
-          'Pesquisar',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 22,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      appBar: buildAppBar(),
+      floatingActionButton: buildFloatingActionButton(),
       body: ListView(
         children: [
           buildContainerPropaganda(),
@@ -129,6 +102,58 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  buildAppBar() {
+    return AppBar(
+      centerTitle: false,
+      backgroundColor: const Color(0xFF10397B),
+      actions: [
+        IconButton(
+          onPressed: () {
+            SharedPrefs().setUser(false);
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) {
+                return const LoginPage();
+              },
+            ));
+          },
+          icon: const Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+        )
+      ],
+      title: const Text(
+        'Pesquisar',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  buildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: const Color(0xFF3F68F7),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const RegisterPackage();
+            },
+          ),
+        ).then(
+          (value) async {
+            await loadData();
+            setState(() {});
+          },
+        );
+      },
+      child: const Icon(Icons.add, color: Colors.white),
     );
   }
 }
