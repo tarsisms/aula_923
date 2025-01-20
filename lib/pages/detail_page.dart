@@ -1,5 +1,7 @@
 import 'package:aula_923/domain/pacote_turistico.dart';
+import 'package:aula_923/pages/map_page.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatefulWidget {
@@ -30,14 +32,41 @@ class _DetailPageState extends State<DetailPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  pacote.cidade,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      pacote.cidade,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+
+                        List<Location> locations = await locationFromAddress(pacote.cidade);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MapPage(location: locations[0]);
+                            },
+                          ),
+                        );
+
+                      },
+                      child: Text(
+                        'Ver no mapa',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
                 Text(
                   pacote.titulo,
                   style: GoogleFonts.montserrat(
@@ -87,22 +116,13 @@ class _DetailPageState extends State<DetailPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
-                      children: [
-                        Icon(Icons.check, size: 48),
-                        Text('Apartamento')
-                      ],
+                      children: [Icon(Icons.check, size: 48), Text('Apartamento')],
                     ),
                     Column(
-                      children: [
-                        Icon(Icons.room_service, size: 48),
-                        Text('All Inclusive')
-                      ],
+                      children: [Icon(Icons.room_service, size: 48), Text('All Inclusive')],
                     ),
                     Column(
-                      children: [
-                        Icon(Icons.flight, size: 48),
-                        Text('Passagem Aérea')
-                      ],
+                      children: [Icon(Icons.flight, size: 48), Text('Passagem Aérea')],
                     ),
                   ],
                 ),
