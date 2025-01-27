@@ -1,4 +1,6 @@
+import 'package:aula_923/api/address_api.dart';
 import 'package:aula_923/db/user_dao.dart';
+import 'package:aula_923/domain/address.dart';
 import 'package:aula_923/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +16,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
   TextEditingController confirmSenhaController = TextEditingController();
+  TextEditingController cepController = TextEditingController();
+  TextEditingController enderecoController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -87,6 +91,31 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: buildInputDecoration('Confirmação de Senha'),
                   cursorColor: const Color(0xFF10397B),
                 ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: cepController,
+                  decoration: buildInputDecoration(
+                    'CEP',
+                    suffixIcon: IconButton(
+                      onPressed: onPressedCepButton,
+                      icon: const Icon(Icons.search),
+                    ),
+                  ),
+                  cursorColor: const Color(0xFF10397B),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: enderecoController,
+                  validator: (value) {
+                    if (value!.isNotEmpty) {
+                      return null;
+                    } else {
+                      return "Você precisa digitar um endereço válido!";
+                    }
+                  },
+                  decoration: buildInputDecoration('Endereço'),
+                  cursorColor: const Color(0xFF10397B),
+                ),
                 const SizedBox(height: 32),
                 // Spacer(),
                 ElevatedButton(
@@ -117,8 +146,27 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  buildInputDecoration(String name) {
+  Future<void> onPressedCepButton() async {
+    String cep = cepController.text;
+    try {
+      Address address = await AddressApi().findAddressByCep(cep);
+      enderecoController.text = address.street;
+    } catch (e) {
+      showSnackBar('Ocorreu um erro inesperado!');
+    }
+  }
+
+  showSnackBar(String snackBarMessage) {
+    SnackBar snackBar = SnackBar(
+      content: Text(snackBarMessage),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  buildInputDecoration(String name, {Widget? suffixIcon}) {
     return InputDecoration(
+      suffixIcon: suffixIcon,
       label: Text(name),
       floatingLabelStyle: GoogleFonts.montserrat(
         color: const Color(0xFF10397B),
