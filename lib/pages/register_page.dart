@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
     User user = User(username, password);
     await UserDao().salvar(user);
 
-    sprint('Usuario Cadastrado com sucesso!');
+    print('Usuario Cadastrado com sucesso!');
     Navigator.pop(context);
   }
 
