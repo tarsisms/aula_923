@@ -1,3 +1,4 @@
+import 'package:aula_923/db/shared_prefs.dart';
 import 'package:aula_923/db/user_dao.dart';
 import 'package:aula_923/pages/home_page.dart';
 import 'package:aula_923/pages/register_page.dart' show RegisterPage;
@@ -95,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
     bool auth = await UserDao().autenticacao(user, password);
 
     if (auth) {
+      SharedPrefs().setUserStatus(true);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
