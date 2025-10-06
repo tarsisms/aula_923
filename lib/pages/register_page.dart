@@ -1,4 +1,6 @@
+import 'package:aula_923/api/address_api.dart';
 import 'package:aula_923/db/user_dao.dart';
+import 'package:aula_923/domain/Address.dart';
 import 'package:aula_923/domain/user.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController cepController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,23 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Senha',
+                  focusedBorder: buildPasswordOutlineInputBorder(),
+                  border: buildPasswordOutlineInputBorder(),
+                ),
+              ),
+              TextField(
+                controller: cepController,
+                decoration: InputDecoration(
+                  hintText: 'CEP',
+                  suffixIcon: IconButton(onPressed: onPressedSearchCEP, icon: Icon(Icons.search)),
+                  focusedBorder: buildPasswordOutlineInputBorder(),
+                  border: buildPasswordOutlineInputBorder(),
+                ),
+              ),
+              TextField(
+                controller: addressController,
+                decoration: InputDecoration(
+                  hintText: 'Endereço',
                   focusedBorder: buildPasswordOutlineInputBorder(),
                   border: buildPasswordOutlineInputBorder(),
                 ),
@@ -97,5 +118,11 @@ class _RegisterPageState extends State<RegisterPage> {
         top: Radius.circular(8),
       ),
     );
+  }
+
+  Future<void> onPressedSearchCEP() async {
+    String cep = cepController.text;
+    Address address = await AddressApi().findByCep(cep);
+    addressController.text = address.completeAddress;
   }
 }
