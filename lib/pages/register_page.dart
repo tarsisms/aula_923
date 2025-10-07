@@ -36,8 +36,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: userController,
                 decoration: InputDecoration(
                   hintText: 'Usuário',
-                  focusedBorder: buildUserOutlineInputBorder(),
-                  border: buildUserOutlineInputBorder(),
+                  focusedBorder: buildFirstItemOutlineInputBorder(),
+                  border: buildFirstItemOutlineInputBorder(),
                 ),
               ),
               TextField(
@@ -45,25 +45,26 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Senha',
-                  focusedBorder: buildPasswordOutlineInputBorder(),
-                  border: buildPasswordOutlineInputBorder(),
+                  focusedBorder: buildSecondItemOutlineInputBorder(),
+                  border: buildSecondItemOutlineInputBorder(),
                 ),
               ),
+              SizedBox(height: 16),
               TextField(
                 controller: cepController,
                 decoration: InputDecoration(
                   hintText: 'CEP',
                   suffixIcon: IconButton(onPressed: onPressedSearchCEP, icon: Icon(Icons.search)),
-                  focusedBorder: buildPasswordOutlineInputBorder(),
-                  border: buildPasswordOutlineInputBorder(),
+                  focusedBorder: buildFirstItemOutlineInputBorder(),
+                  border: buildFirstItemOutlineInputBorder(),
                 ),
               ),
               TextField(
                 controller: addressController,
                 decoration: InputDecoration(
                   hintText: 'Endereço',
-                  focusedBorder: buildPasswordOutlineInputBorder(),
-                  border: buildPasswordOutlineInputBorder(),
+                  focusedBorder: buildSecondItemOutlineInputBorder(),
+                  border: buildSecondItemOutlineInputBorder(),
                 ),
               ),
               SizedBox(height: 24),
@@ -102,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
     Navigator.pop(context);
   }
 
-  OutlineInputBorder buildPasswordOutlineInputBorder() {
+  OutlineInputBorder buildSecondItemOutlineInputBorder() {
     return OutlineInputBorder(
       borderSide: BorderSide(color: Colors.grey),
       borderRadius: BorderRadius.vertical(
@@ -111,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  OutlineInputBorder buildUserOutlineInputBorder() {
+  OutlineInputBorder buildFirstItemOutlineInputBorder() {
     return OutlineInputBorder(
       borderSide: BorderSide(color: Colors.grey),
       borderRadius: BorderRadius.vertical(
