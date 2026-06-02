@@ -1,4 +1,5 @@
-import 'package:aula_923/db/fake_database.dart';
+import 'package:aula_923/db/propriedade_dao.dart';
+import 'package:aula_923/domain/propriedade.dart';
 import 'package:aula_923/widget/container_propriedade.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,20 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
+  List<Propriedade> listaPropriedades = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    listaPropriedades = await PropriedadeDao().listarPropriedades();
+    await Future.delayed(Duration(seconds: 3));
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +42,11 @@ class _ExplorePageState extends State<ExplorePage> {
       // For(i = 0; i < tam; i++)
       body: ListView.builder(
         // Tamanho da lista - Numero de repeticoes
-        itemCount: FakeDatabase.listaPropriedades.length,
+        itemCount: listaPropriedades.length,
         // Repetir
         itemBuilder: (context, i) {
           // Chamando o novo Widget
-          return ContainerPropriedade(propriedade: FakeDatabase.listaPropriedades[i]);
+          return ContainerPropriedade(propriedade: listaPropriedades[i]);
         },
       ),
 
