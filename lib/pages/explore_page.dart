@@ -1,5 +1,7 @@
 import 'package:aula_923/db/propriedade_dao.dart';
+import 'package:aula_923/db/shared_prefs.dart';
 import 'package:aula_923/domain/propriedade.dart';
+import 'package:aula_923/pages/login_page.dart';
 import 'package:aula_923/widget/container_propriedade.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
+  SharedPrefs prefs = SharedPrefs();
   List<Propriedade> listaPropriedades = [];
 
   @override
@@ -29,6 +32,7 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: buildActions(),
         title: TextField(
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.search),
@@ -58,5 +62,24 @@ class _ExplorePageState extends State<ExplorePage> {
       //   ],
       // ),
     );
+  }
+
+  buildActions() {
+    return [
+      IconButton(
+        onPressed: () {
+          prefs.setUserStatus(false);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return LoginPage();
+              },
+            ),
+          );
+        },
+        icon: Icon(Icons.logout),
+      ),
+    ];
   }
 }
