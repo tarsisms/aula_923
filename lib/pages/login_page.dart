@@ -1,4 +1,5 @@
 import 'package:aula_923/db/shared_prefs.dart';
+import 'package:aula_923/db/user_dao.dart';
 import 'package:aula_923/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -89,11 +90,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  onPressed() {
-    String user = userController.text;
+  onPressed() async {
+    String username = userController.text;
     String password = passwordController.text;
 
-    if (user == 'joao@gmail.com' && password == '123456') {
+    bool isAuth = await UserDao().login(username, password);
+
+    // if (user == 'joao@gmail.com' && password == '123456') {
+
+    if (isAuth) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -104,6 +109,8 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       prefs.setUserStatus(true);
+    } else {
+      print('User e/ou password incorretos');
     }
   }
 
