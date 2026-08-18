@@ -14,53 +14,61 @@ class ExplorePage extends StatefulWidget {
 
 class _ExplorePageState extends State<ExplorePage> {
   SharedPrefs prefs = SharedPrefs();
-  List<Propriedade> listaPropriedades = [];
+  // List<Propriedade> listaPropriedades = [];
+  late Future<List<Propriedade>> futureLista;
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    futureLista = PropriedadeDao().listarPropriedades();
   }
 
-  loadData() async {
-    listaPropriedades = await PropriedadeDao().listarPropriedades();
-    await Future.delayed(Duration(seconds: 3));
-    setState(() {});
-  }
+  // loadData() async {
+  //
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: buildActions(),
-        title: TextField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: Icon(Icons.menu),
-            hintText: 'Pesquisar',
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-          ),
-        ),
-      ),
+      appBar: buildAppBar(),
+      body: FutureBuilder(
+        future: futureLista,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Propriedade> listaPropriedades = snapshot.requireData;
+            return buildListView(listaPropriedades);
+          }
 
-      // For(i = 0; i < tam; i++)
-      body: ListView.builder(
-        // Tamanho da lista - Numero de repeticoes
-        itemCount: listaPropriedades.length,
-        // Repetir
-        itemBuilder: (context, i) {
-          // Chamando o novo Widget
-          return ContainerPropriedade(propriedade: listaPropriedades[i]);
+          return Center(child: CircularProgressIndicator());
         },
       ),
+    );
+  }
 
-      // ListView(
-      //   children: [
-      //     buildContainer(prop: listaPropriedades[0]),
-      //     buildContainer(prop: listaPropriedades[1]),
-      //     buildContainer(prop: listaPropriedades[2]),
-      //   ],
-      // ),
+  buildAppBar() {
+    return AppBar(
+      actions: buildActions(),
+      title: TextField(
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          suffixIcon: Icon(Icons.menu),
+          hintText: 'Pesquisar',
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+        ),
+      ),
+    );
+  }
+
+  buildListView(List<Propriedade> listaPropriedades) {
+    return ListView.builder(
+      // Tamanho da lista - Numero de repeticoes
+      itemCount: listaPropriedades.length,
+      // Repetir
+      itemBuilder: (context, i) {
+        // Chamando o novo Widget
+        return ContainerPropriedade(propriedade: listaPropriedades[i]);
+      },
     );
   }
 
