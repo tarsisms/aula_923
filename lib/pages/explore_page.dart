@@ -1,4 +1,4 @@
-import 'package:aula_923/db/propriedade_dao.dart';
+import 'package:aula_923/api/propriedades_api.dart';
 import 'package:aula_923/db/shared_prefs.dart';
 import 'package:aula_923/domain/propriedade.dart';
 import 'package:aula_923/pages/login_page.dart';
@@ -20,7 +20,8 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   void initState() {
     super.initState();
-    futureLista = PropriedadeDao().listarPropriedades();
+    // futureLista = PropriedadeDao().listarPropriedades();
+    futureLista = PropriedadesApi().listarPropriedades();
   }
 
   // loadData() async {
