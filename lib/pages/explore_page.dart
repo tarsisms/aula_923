@@ -1,9 +1,10 @@
-import 'package:aula_923/api/propriedades_api.dart';
 import 'package:aula_923/db/shared_prefs.dart';
 import 'package:aula_923/domain/propriedade.dart';
 import 'package:aula_923/pages/login_page.dart';
 import 'package:aula_923/widget/container_propriedade.dart';
 import 'package:flutter/material.dart';
+
+import '../db/propriedade_dao.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -20,8 +21,8 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   void initState() {
     super.initState();
-    // futureLista = PropriedadeDao().listarPropriedades();
-    futureLista = PropriedadesApi().listarPropriedades();
+    futureLista = PropriedadeDao().listarPropriedades();
+    // futureLista = PropriedadesApi().listarPropriedades();
   }
 
   // loadData() async {
