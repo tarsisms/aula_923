@@ -19,15 +19,23 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
+        // Obter a Latitude e a Longitude a partir de um Endereco
         final Geocoding geocoding = Geocoding();
         List<Location> locations = await geocoding.locationFromAddress(widget.propriedade.local);
-        var location = LatLng(locations[0].latitude, locations[0].longitude);
 
+        // Obter a Latitute e a Longitude da primeira localizacao
+        var latitude = locations[0].latitude;
+        var longitude = locations[0].longitude;
+
+        // Navegacao p/ DetailPage passando LatLng
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return DetailPage(propriedade: widget.propriedade, location: location);
+              return DetailPage(
+                propriedade: widget.propriedade,
+                location: LatLng(latitude, longitude),
+              );
             },
           ),
         );

@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DetailPage extends StatefulWidget {
   Propriedade propriedade;
-  late LatLng location;
+  LatLng location;
 
   DetailPage({super.key, required this.propriedade, required this.location});
 
