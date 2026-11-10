@@ -42,6 +42,7 @@ dependencies:
   dio:
   google_maps_flutter:
   geocoding:
+  geolocator:
 
 
 dev_dependencies:

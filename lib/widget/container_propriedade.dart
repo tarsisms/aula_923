@@ -1,7 +1,7 @@
 import 'package:aula_923/domain/propriedade.dart';
 import 'package:aula_923/pages/detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -20,12 +20,46 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
     return InkWell(
       onTap: () async {
         // Obter a Latitude e a Longitude a partir de um Endereco
-        final Geocoding geocoding = Geocoding();
-        List<Location> locations = await geocoding.locationFromAddress(widget.propriedade.local);
+        // final Geocoding geocoding = Geocoding();
+        // List<Location> locations = await geocoding.locationFromAddress(widget.propriedade.local);
 
         // Obter a Latitute e a Longitude da primeira localizacao
-        var latitude = locations[0].latitude;
-        var longitude = locations[0].longitude;
+        // var latitude = locations[0].latitude;
+        // var longitude = locations[0].longitude;
+
+        // Obter localizacao atual do usuario
+        Position myLocationPosition = await getCurrentPosition();
+
+        // Localizacoes
+        LatLng myLocation = LatLng(myLocationPosition.latitude, myLocationPosition.longitude);
+        LatLng ifalLocation = LatLng(-9.745411162105748, -36.631326404465156);
+
+        // Calcular a distancia entre dois pontos
+        double distance = Geolocator.distanceBetween(
+          myLocation.latitude,
+          myLocation.longitude,
+          ifalLocation.latitude,
+          ifalLocation.longitude,
+        );
+
+        // Converter p/ km
+        double distanceInKm = distance / 1000;
+
+        Set<Marker> markes = {
+          Marker(
+            markerId: MarkerId('1'),
+            position: myLocation,
+            infoWindow: InfoWindow(title: 'Você está aqui!'),
+          ),
+          Marker(
+            markerId: MarkerId('2'),
+            position: ifalLocation,
+            infoWindow: InfoWindow(
+              title: 'IFAL - campus Arapiraca',
+              snippet: 'Distancia de ${distanceInKm.toStringAsFixed(2)} km',
+            ),
+          ),
+        };
 
         // Navegacao p/ DetailPage passando LatLng
         Navigator.push(
@@ -34,7 +68,8 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
             builder: (context) {
               return DetailPage(
                 propriedade: widget.propriedade,
-                location: LatLng(latitude, longitude),
+                markers: markes,
+                location: myLocation,
               );
             },
           ),
@@ -80,6 +115,36 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
         ),
       ),
     );
+  }
+
+  Future<Position> getCurrentPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Verificar se o GPS está ativo
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    // Verficar se permissao de acessar os dados de Localizacao
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // Solicitar a permissao de acesso aos dados de Localizacao
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
+    }
+
+    // Retornar a posicao atual do usuario
+    return await Geolocator.getCurrentPosition();
   }
 
   buildText(String text) {
