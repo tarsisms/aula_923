@@ -1,0 +1,44 @@
+import 'package:aula_923/domain/propriedade.dart';
+import 'package:aula_923/provider/favorite_provider.dart';
+import 'package:aula_923/widget/container_propriedade.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class FavoritePage extends StatefulWidget {
+  const FavoritePage({super.key});
+
+  @override
+  State<FavoritePage> createState() => _FavoritePageState();
+}
+
+class _FavoritePageState extends State<FavoritePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Propriedade> listaPropriedades = context.watch<FavoriteProvider>().favoritos;
+
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: listaPropriedades.length,
+        itemBuilder: (context, i) {
+          return ContainerPropriedade(propriedade: listaPropriedades[i]);
+        },
+      ),
+    );
+  }
+
+  buildListView(listaPropriedades) {
+    return ListView.builder(
+      // Num de repeticoes
+      itemCount: listaPropriedades.length,
+      // Children
+      itemBuilder: (context, i) {
+        return ContainerPropriedade(propriedade: listaPropriedades[i]);
+      },
+    );
+  }
+}

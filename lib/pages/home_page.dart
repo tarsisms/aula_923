@@ -1,4 +1,5 @@
 import 'package:aula_923/pages/explore_page.dart';
+import 'package:aula_923/pages/favorite_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   List pages = [
     ExplorePage(),
-    Center(child: Text('Pagina 1', style: TextStyle(fontSize: 32))),
+    FavoritePage(),
     Center(child: Text('Pagina 2', style: TextStyle(fontSize: 32))),
     Center(child: Text('Pagina 3', style: TextStyle(fontSize: 32))),
     Center(child: Text('Pagina 4', style: TextStyle(fontSize: 32))),
